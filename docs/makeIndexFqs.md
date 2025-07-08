@@ -15,7 +15,7 @@ python makeIndexFqs.py <read1_fastq> [options]
 ### Basic Command
 
 ```bash
-python makeIndexFqs.py sample_R1_001.fastq.gz --outDir ./output --mode 3lvl
+python makeIndexFqs.py sample_R1_001.fastq.gz --outDir ./fastqDir --mode 3lvl
 ```
 
 ### Command Line Options
@@ -43,7 +43,7 @@ python makeIndexFqs.py sample_R1_001.fastq.gz --outDir ./output --mode 3lvl
 
 **Usage**:
 ```bash
-python makeIndexFqs.py sample_R1_001.fastq.gz --mode 3lvl --outDir ./output
+python makeIndexFqs.py sample_R1_001.fastq.gz --mode 3lvl --outDir ./fastqDir
 ```
 
 ### QS Mode (QuantumScale)
@@ -61,7 +61,7 @@ python makeIndexFqs.py sample_R1_001.fastq.gz --mode 3lvl --outDir ./output
 
 **Usage**:
 ```bash
-python makeIndexFqs.py sample_R1_001.fastq.gz --mode QS --outDir ./output
+python makeIndexFqs.py sample_R1_001.fastq.gz --mode QS --outDir ./fastqDir
 ```
 
 ## Output Files
@@ -76,13 +76,13 @@ The script generates compressed FASTQ files:
 ### ScaleRNA v1 Processing
 ```bash
 # Process ScaleRNA v1 data
-python makeIndexFqs.py experiment_R1_001.fastq.gz --mode 3lvl --outDir ./index_files
+python makeIndexFqs.py experiment_R1_001.fastq.gz --mode 3lvl --outDir ./fastqDir
 ```
 
 ### QuantumScale Processing
 ```bash
 # Process QuantumScale data
-python makeIndexFqs.py quantum_R1_001.fastq.gz --mode QS --outDir ./index_files
+python makeIndexFqs.py quantum_R1_001.fastq.gz --mode QS --outDir ./fastqDir
 ```
 
 ## Notes
@@ -90,3 +90,4 @@ python makeIndexFqs.py quantum_R1_001.fastq.gz --mode QS --outDir ./index_files
 - The script automatically handles gzip compression/decompression
 - Quality scores are set to a default value (ASCII 37, offset 33)
 - Index sequences are validated for length consistency across all reads
+- It's important to keep the `I1/I2` files together in the same directory as `R1/R2` fastqs

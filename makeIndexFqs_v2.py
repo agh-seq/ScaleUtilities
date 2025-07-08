@@ -7,7 +7,7 @@ import pathlib
 
 
 def parse_3lvl_header(header):
-    """Parse 3lvl format header: @readName attributes
+    """Parse 3lvl format header: @readName attributes(i7+i5)
     Example: @VH02171:15:2227VLHNX:1:1101:19144:1000 1:N:0:GCTCTCGCCT+TCGGATTCGG
     Extracts index sequences from the 4th colon-separated field in attributes
     """
@@ -20,11 +20,11 @@ def parse_3lvl_header(header):
 
 
 def parse_qs_header(header):
-    """Parse QS format header: @readName:index1 attributes
+    """Parse QS format header: @readName:partial-index1 attributes(i7+i5)
     Example: @LH00659:241:22T7WLLT4:1:1101:42065:1140:CTGTCCTAATGGGGTTACCGAAGA 1:N:0:TNCAGACA+GTTCGATA
     Based on OverrideCycles: Y82;I8U24;I8;Y16
-    Index1 = concatenation of index2 + index1 (from read name)
-    Index2 = index3 (from attributes)
+    cell-barcode = concatenation of i7 + partial-index1 (from read name)
+    i5 = i5 from attributes
     """
     name_part, _, attr = header.strip().partition(" ")
     assert name_part[0] == "@", "Fastq read name does not start with '@'"
@@ -41,8 +41,8 @@ def parse_qs_header(header):
     assert len(attrs) >= 4, f"Fastq read header does not have 4 fields: {name}"
     attr_index1, _, attr_index2 = attrs[3].partition("+")
     
-    # For QS mode: Index1 = concatenation of attr_index1 + read_name_index
-    # Index2 = attr_index2
+    # For QS mode: cell-barcode = concatenation of attr_index1 + read_name_index
+    # i5 = attr_index2
     index1Seq = attr_index1 + read_name_index
     index2Seq = attr_index2
     

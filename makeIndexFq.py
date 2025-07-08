@@ -41,8 +41,9 @@ def parse_qs_header(header):
     assert len(attrs) >= 4, f"Fastq read header does not have 4 fields: {name}"
     attr_index1, _, attr_index2 = attrs[3].partition("+")
     
-    # For QS mode: cell-barcode = concatenation of attr_index1 + read_name_index
-    # i5 = attr_index2
+    # For QS mode: 
+    # index1Seq = cell-barcode
+    # index2Seq = i5
     index1Seq = attr_index1 + read_name_index
     index2Seq = attr_index2
     
